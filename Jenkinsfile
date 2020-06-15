@@ -67,17 +67,17 @@ pipeline {
 
                             if [ "$anio_ref" > "$anio" ]; then
 
-                                curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$ulr_item"
+                                curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$url_item"
                                 echo "borro por año"
                             
                             elif [ "$anio_ref" = "$anio" ] && [ "$mes_ref" > "$mes" ]; then
 
-                                curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$ulr_item"
+                                curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$url_item"
                                 echo "borro por mes"
 
                             elif [ "$anio_ref" = "$anio" ] && [ "$mes_ref" = "$mes" ] && [ "$dia_ref" > "$dia" ]; then
 
-                                curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$ulr_item"
+                                curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$url_item"
                                 echo "borro por dia"
                             fi
 
