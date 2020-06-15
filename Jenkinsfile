@@ -12,6 +12,13 @@ pipeline {
         
     }
 
+    parameters {
+        choice(
+            name: 'artifact',
+            choices: "onos\nbackofficeFrontend\nprovisionerFrontend\nprovisionerBackend",
+            description: 'which deprecated artifacted would you like to clean?' )
+    }
+
     
 
     stages {
