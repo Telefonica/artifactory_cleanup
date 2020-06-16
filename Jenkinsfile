@@ -36,6 +36,7 @@ pipeline {
                         artefacto="$artifact"
                         fecha_ref=$deprecated_date
                         url_api="http://artifactory.hi.inet/artifactory/api/storage/misc-oln/repo/"
+                        url_base="http://artifactory.hi.inet/artifactory/misc-oln/repo/
 
 
                         anio_ref=$(echo $fecha_ref | awk -F'-' '{print $1}')
@@ -60,28 +61,26 @@ pipeline {
                             curl -v -X GET -u "$ARTIFACTORY_CRED" "$url_item" -o item_file
                             echo $url_item
                             
-                            cat item_file
-                            anio_2=$(grep "\\\"created\\\"" item_file | awk '{print $3}'| sed -e 's/-/ /' -e 's/-/ /' -e 's/T/ /' -e 's/"/ /')
+                            url_delete=$url_base$artefacto/$rama$item
+
                             anio=$(grep "\\\"created\\\"" item_file | awk '{print $3}'| sed -e 's/-/ /' -e 's/-/ /' -e 's/T/ /' -e 's/"/ /' |awk '{print $1}')
                             mes=$(grep "\"created\"" item_file | awk '{print $3}'| sed -e 's/-/ /' -e 's/-/ /' -e 's/T/ /' -e 's/"/ /' |awk '{print $2}')
                             dia=$(grep "\"created\"" item_file | awk '{print $3}'| sed -e 's/-/ /' -e 's/-/ /' -e 's/T/ /' -e 's/"/ /' |awk '{print $3}')
                             
-                            echo $anio_2
-                            echo $anio
-                            echo $anio_ref
+                            
                             if [ "$anio_ref" -gt "$anio" ]; then
 
-                                curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$url_item"
+                                curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$url_delete"
                                 echo "borro por año"
                             
                             elif [ "$anio_ref" -eq "$anio" ] && [ "$mes_ref" -gt "$mes" ]; then
 
-                                curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$url_item"
+                                curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$url_delete"
                                 echo "borro por mes"
 
                             elif [ "$anio_ref" -eq "$anio" ] && [ "$mes_ref" -eq "$mes" ] && [ "$dia_ref" -gt "$dia" ]; then
 
-                                curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$url_item"
+                                curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$url_delete"
                                 echo "borro por dia"
                             fi
 
