@@ -69,7 +69,7 @@ pipeline {
                             echo $anio_2
                             echo $anio
                             echo $anio_ref
-                            if [ "$anio_ref" > "$anio" ]; then
+                            if [ "$anio_ref" -gt "$anio" ]; then
 
                                 #curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$url_item"
                                 echo "borro por año"
