@@ -30,7 +30,7 @@ pipeline {
 
                 
                 sh '''
-                        
+                        #!/bin/bash
 
                         rama="$brach"
                         artefacto="$artifact"
