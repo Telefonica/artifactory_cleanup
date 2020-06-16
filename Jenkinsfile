@@ -64,20 +64,22 @@ pipeline {
                             anio=$(grep "\"created\"" item_file | awk '{print $3}'| sed -e 's/-/ /' -e 's/-/ /' -e 's/T/ /' -e 's/"/ /' |awk '{print $1}')
                             mes=$(grep "\"created\"" item_file | awk '{print $3}'| sed -e 's/-/ /' -e 's/-/ /' -e 's/T/ /' -e 's/"/ /' |awk '{print $2}')
                             dia=$(grep "\"created\"" item_file | awk '{print $3}'| sed -e 's/-/ /' -e 's/-/ /' -e 's/T/ /' -e 's/"/ /' |awk '{print $3}')
-
+                            
+                            echo $anio
+                            echo $anio_ref
                             if [ "$anio_ref" == "$anio" ]; then
 
-                                curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$url_item"
+                                #curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$url_item"
                                 echo "borro por año"
                             
                             elif [ "$anio_ref" == "$anio" ] && [ "$mes_ref" > "$mes" ]; then
 
-                                curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$url_item"
+                                #curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$url_item"
                                 echo "borro por mes"
 
                             elif [ "$anio_ref" == "$anio" ] && [ "$mes_ref" == "$mes" ] && [ "$dia_ref" > "$dia" ]; then
 
-                                curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$url_item"
+                                #curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$url_item"
                                 echo "borro por dia"
                             fi
 
