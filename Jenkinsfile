@@ -36,7 +36,7 @@ pipeline {
                         artefacto="$artifact"
                         fecha_ref=$deprecated_date
                         url_api="http://artifactory.hi.inet/artifactory/api/storage/misc-oln/repo/"
-                        url_base="http://artifactory.hi.inet/artifactory/misc-oln/repo/
+                        url_base="http://artifactory.hi.inet/artifactory/misc-oln/repo/"
 
 
                         anio_ref=$(echo $fecha_ref | awk -F'-' '{print $1}')
