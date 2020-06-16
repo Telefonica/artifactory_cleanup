@@ -65,17 +65,17 @@ pipeline {
                             mes=$(grep "\"created\"" item_file | awk '{print $3}'| sed -e 's/-/ /' -e 's/-/ /' -e 's/T/ /' -e 's/"/ /' |awk '{print $2}')
                             dia=$(grep "\"created\"" item_file | awk '{print $3}'| sed -e 's/-/ /' -e 's/-/ /' -e 's/T/ /' -e 's/"/ /' |awk '{print $3}')
 
-                            if [ $anio_ref -gt $anio ]; then
+                            if [ "$anio_ref" -gt "$anio" ]; then
 
                                 curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$url_item"
                                 echo "borro por año"
                             
-                            elif [ $anio_ref -eq $anio ] && [ $mes_ref -gt $mes ]; then
+                            elif [ "$anio_ref" -eq "$anio" ] && [ "$mes_ref" -gt "$mes" ]; then
 
                                 curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$url_item"
                                 echo "borro por mes"
 
-                            elif [ $anio_ref -eq $anio ] && [ $mes_ref -eq $mes ] && [ $dia_ref -gt $dia ]; then
+                            elif [ "$anio_ref" -eq "$anio" ] && [ "$mes_ref" -eq "$mes" ] && [ "$dia_ref" -gt "$dia" ]; then
 
                                 curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$url_item"
                                 echo "borro por dia"
