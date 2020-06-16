@@ -51,8 +51,7 @@ pipeline {
 
                         input="uri_tar"
                         while IFS= read -r line
-                        do
-                            echo "$line"
+                        do                            echo "$line"
 
 
                             item=$line
@@ -60,11 +59,14 @@ pipeline {
                             url_item=$url_file$item
                             curl -v -X GET -u "$ARTIFACTORY_CRED" "$url_item" -o item_file
                             echo $url_item
-
+                            
+                            cat item_file
+                            anio_2=$(grep "\"created\"" item_file | awk '{print $3}'| sed -e 's/-/ /' -e 's/-/ /' -e 's/T/ /' -e 's/"/ /')
                             anio=$(grep "\"created\"" item_file | awk '{print $3}'| sed -e 's/-/ /' -e 's/-/ /' -e 's/T/ /' -e 's/"/ /' |awk '{print $1}')
                             mes=$(grep "\"created\"" item_file | awk '{print $3}'| sed -e 's/-/ /' -e 's/-/ /' -e 's/T/ /' -e 's/"/ /' |awk '{print $2}')
                             dia=$(grep "\"created\"" item_file | awk '{print $3}'| sed -e 's/-/ /' -e 's/-/ /' -e 's/T/ /' -e 's/"/ /' |awk '{print $3}')
                             
+                            echo $anio_2
                             echo $anio
                             echo $anio_ref
                             if [ "$anio_ref" == "$anio" ]; then
