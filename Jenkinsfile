@@ -70,7 +70,7 @@ pipeline {
                                 curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$url_item"
                                 echo "borro por año"
                             
-                            elif [ "$anio_ref" -eq "$anio" ] && [ "$mes_ref" -gt "$mes" ]; then
+                            elif [ "$anio_ref" == "$anio" ] && [ "$mes_ref" > "$mes" ]; then
 
                                 curl -v -X DELETE -u "$ARTIFACTORY_CRED" "$url_item"
                                 echo "borro por mes"
